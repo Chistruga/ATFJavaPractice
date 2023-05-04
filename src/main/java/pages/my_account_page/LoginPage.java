@@ -1,21 +1,48 @@
 package pages.my_account_page;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import pages.base.BasePage;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.junit.Assert;
 
-public class LoginPage extends BasePage {
+public class LoginPage {
+    WebDriver driver;
+
     public LoginPage(WebDriver driver) {
-        super(driver);
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
-    private final By username = By.id("username");
-    private final By password = By.id("password");
-    private final By logInButton = By.xpath("//button[@value='Log in']");
+    @FindBy(xpath = "//div[@class='u-column1 col-1']//h2[text()='Login']")
+    WebElement textLogin;
 
-    public LoginPage clickToCreateAnAccount(){
-        driver.findElement(logInButton).click();
-        return this;
+    @FindBy(id = "username")
+    WebElement txtUsername;
+
+    @FindBy(id = "password")
+    WebElement txtPassword;
+
+    @FindBy(xpath = "//button[@value='Log in']")
+    WebElement logInButton;
+
+    public WebElement getTxtUsername() {
+        return txtUsername;
     }
 
+    public WebElement getTxtPassword() {
+        return txtPassword;
+    }
+
+    public WebElement getLogInButton() {
+        return logInButton;
+    }
+
+    public WebElement getTextLogin() {
+        return textLogin;
+    }
+
+    public void enterUsername(String username) {
+        txtUsername.sendKeys(username);
+    }
 }

@@ -2,20 +2,46 @@ package pages.my_account_page;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import pages.base.BasePage;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-public class RegisterPage extends BasePage {
+public class RegisterPage {
+    WebDriver driver;
+
     public RegisterPage(WebDriver driver) {
-        super(driver);
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
-    private final By username = By.id("reg_username");
-    private final By email = By.xpath("//input[@name='email']");
-    private final By password = By.cssSelector("input[id ='reg_password']");
-    private final By registerButton = By.cssSelector("button[value='Register']");
+    @FindBy(xpath = "//div[@class='u-column2 col-2']//h2[text()='Register']")
+    WebElement textRegister;
+    @FindBy(id = "reg_username")
+    WebElement txtUsername;
+    @FindBy(xpath = "//input[@name='email']")
+    WebElement txtEmail;
+    @FindBy(css = "input[id ='reg_password']")
+    WebElement txtPassword;
+    @FindBy(css = "button[value='Register']")
+    WebElement registerButton;
 
-    public RegisterPage clickToRegisterButton() {
-        driver.findElement(registerButton).click();
-        return this;
+    public WebElement getTextRegister() {
+        return textRegister;
+    }
+
+    public WebElement getTxtUsername() {
+        return txtUsername;
+    }
+
+    public WebElement getTxtEmail() {
+        return txtEmail;
+    }
+
+    public WebElement getTxtPassword() {
+        return txtPassword;
+    }
+
+    public WebElement getRegisterButton() {
+        return registerButton;
     }
 }
